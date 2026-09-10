@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roteiro de setembro de 2026</title>
+<meta name="theme-color" content="#1B2B3A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Roteiro">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1B2B3A; --foam:#EAF1EF; --paper:#F9FBFA; --sea:#0C7F7C;
+  --bloom:#B8326E; --stone:#5B6A70; --rule:#D3DEDB;
+  --serif:"Bodoni Moda","Bodoni 72",Didot,Georgia,serif;
+  --sans:"Work Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--bloom);outline-offset:2px}
+a{color:var(--sea)}
+
+/* Hero */
+.hero{background:var(--ink);color:var(--foam)}
+.hero .wrap{padding:calc(30px + env(safe-area-inset-top)) 20px 22px}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:2.15rem;line-height:1.06;margin:0 0 8px;letter-spacing:-.01em}
+.hero .tagline{font-family:var(--serif);font-style:italic;margin:0 0 4px;opacity:.78}
+.hero .dates{margin:0 0 18px;font-size:.9rem;opacity:.78}
+.route{font-size:.82rem;line-height:2.1;color:#C4D4D0;margin:0}
+.city{white-space:nowrap}
+.leg{display:inline-block;width:20px;border-top:2px solid currentColor;vertical-align:middle;margin:0 6px;opacity:.75}
+.leg.sea{border-top-style:dashed}
+.leg.car{border-top-style:dotted;border-top-width:3px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.72rem;color:#9FB3AE;margin:6px 0 0}
+.legend .leg{margin-left:0}
+
+.status{margin-top:20px;padding-top:16px;border-top:1px solid rgba(234,241,239,.18);display:grid;grid-template-columns:10px 1fr;gap:0 12px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--bloom);margin-top:8px;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(184,50,110,.7)}70%{box-shadow:0 0 0 10px rgba(184,50,110,0)}100%{box-shadow:0 0 0 0 rgba(184,50,110,0)}}
+.s1{margin:0;font-weight:600}
+.s2{margin:2px 0 10px;font-size:.92rem;opacity:.85}
+.s-btn{font-size:.85rem;font-weight:500;border-bottom:1px solid rgba(234,241,239,.5);padding:2px 0}
+
+/* Tabs */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:var(--ink);z-index:10}
+.tabs{position:sticky;top:env(safe-area-inset-top);z-index:5;background:var(--paper);border-bottom:1px solid var(--rule)}
+.tabs .wrap{display:flex}
+.tab{flex:1;padding:14px 4px 12px;font-size:.88rem;font-weight:500;color:var(--stone);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+main .wrap{padding:0 20px calc(48px + env(safe-area-inset-bottom))}
+section[hidden]{display:none}
+
+/* Day strip */
+.strip{display:flex;gap:6px;overflow-x:auto;padding:16px 20px 12px;margin:0 -20px;scrollbar-width:none;scroll-behavior:smooth}
+.strip::-webkit-scrollbar{display:none}
+.chip{flex:0 0 52px;padding:8px 0 7px;border:1px solid var(--rule);border-radius:10px;text-align:center;background:#fff;position:relative}
+.chip .wd{display:block;font-size:.68rem;color:var(--stone)}
+.chip .n{display:block;font-family:var(--serif);font-size:1.35rem;line-height:1.1;font-weight:500}
+.chip .f{display:block;font-size:.8rem;line-height:1.3}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--foam)}
+.chip[aria-pressed="true"] .wd{color:#B9CBC7}
+.chip.today::after{content:"";position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--bloom)}
+
+/* Day view */
+.day{animation:fade .22s ease-out}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.dow{margin:10px 0 0;font-size:.9rem;color:var(--stone)}
+.today-tag{color:var(--bloom);font-weight:600}
+.day h2{font-family:var(--serif);font-weight:500;font-size:1.9rem;line-height:1.1;margin:2px 0 6px}
+.droute{margin:0 0 14px;font-size:.88rem;color:var(--stone)}
+.sleep{margin:0 0 14px;font-size:.88rem}
+.sleep b{font-weight:600}
+.notes{list-style:none;margin:0 0 18px;padding:0}
+.notes li{font-size:.85rem;padding:8px 12px;border-left:3px solid var(--sea);background:#EEF5F3;margin-bottom:6px}
+.notes li.warn{border-left-color:var(--bloom);background:#F8EDF2}
+.notes b{font-weight:600}
+
+.tl{list-style:none;margin:0;padding:0}
+.it{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--rule)}
+.it:last-child{border-bottom:1px solid var(--rule)}
+.it .t{font-weight:600;font-variant-numeric:tabular-nums;font-size:.95rem;padding-top:1px}
+.it .t.soft{font-weight:400;font-style:italic;font-size:.8rem;color:var(--stone);line-height:1.3;padding-top:3px}
+.kind{display:block;font-size:.72rem;font-weight:600;color:var(--sea);margin-bottom:1px}
+.txt{margin:0}
+.sub{margin:3px 0 0;font-size:.85rem;color:var(--stone)}
+.ok{margin:5px 0 0;font-size:.8rem;font-weight:500;color:var(--sea)}
+.code{margin:6px 0 0;font-size:.8rem;color:var(--stone)}
+.code b{user-select:all;-webkit-user-select:all;color:var(--ink);font-weight:600;letter-spacing:.02em;background:#EEF5F3;padding:1px 6px;border-radius:4px}
+.it.opt .txt{font-style:italic;color:var(--stone)}
+.it.next{background:linear-gradient(90deg,rgba(184,50,110,.07),transparent 70%);margin:0 -20px;padding-left:20px;padding-right:20px;box-shadow:inset 3px 0 0 var(--bloom)}
+.it.next .t{color:var(--bloom)}
+
+.daynav{display:flex;justify-content:space-between;margin-top:20px}
+.daynav button{font-size:.88rem;font-weight:500;padding:10px 0;color:var(--sea)}
+.daynav button:disabled{visibility:hidden}
+
+/* Lists (transporte, hotéis, reservas) */
+.sec-title{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin:24px 0 4px}
+.sec-intro{margin:0 0 12px;font-size:.88rem;color:var(--stone)}
+.row{padding:14px 0;border-top:1px solid var(--rule)}
+.row:last-child{border-bottom:1px solid var(--rule)}
+.meta{margin:0 0 6px;font-size:.8rem;color:var(--stone)}
+.meta b{color:var(--sea);font-weight:600}
+.span{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:6px}
+.span .end{text-align:right}
+.span strong{display:block;font-family:var(--serif);font-weight:500;font-size:1.45rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.span small{display:block;font-size:.8rem;color:var(--stone);line-height:1.3}
+.span .leg{width:100%;margin:0;color:var(--stone)}
+.warn-line{margin:8px 0 0;font-size:.8rem;color:var(--bloom)}
+
+.hotel{display:grid;grid-template-columns:56px 1fr;gap:14px}
+.nights{text-align:center}
+.nights b{display:block;font-family:var(--serif);font-weight:500;font-size:2.4rem;line-height:1}
+.nights span{font-size:.72rem;color:var(--stone)}
+.hotel h3,.res h3{margin:0;font-size:1rem;font-weight:600;line-height:1.3}
+.p{margin:2px 0 0;font-size:.88rem}
+.small{margin:2px 0 0;font-size:.82rem;color:var(--stone)}
+.maplink{display:inline-block;margin-top:6px;font-size:.85rem;font-weight:500}
+
+.foot{font-size:.78rem;color:var(--stone);margin:28px 0 0}
+
+@media (min-width:600px){.hero h1{font-size:2.6rem}}
+@media (prefers-reduced-motion:reduce){.dot,.day{animation:none}.strip{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Bucareste, Riviera Albanesa, Corfu e Praga</h1>
+    <p class="tagline">Because money returns, time doesn't.</p>
+    <p class="dates">10 a 20 de setembro de 2026</p>
+    <p class="route" id="route"></p>
+    <p class="legend">
+      <span><i class="leg"></i>voo</span>
+      <span><i class="leg sea"></i>ferry</span>
+      <span><i class="leg car"></i>estrada</span>
+    </p>
+    <div class="status" id="status" aria-live="polite"></div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <div class="wrap">
+    <button class="tab" role="tab" data-tab="roteiro" aria-selected="true">Roteiro</button>
+    <button class="tab" role="tab" data-tab="transporte" aria-selected="false">Transporte</button>
+    <button class="tab" role="tab" data-tab="hoteis" aria-selected="false">Hotéis</button>
+    <button class="tab" role="tab" data-tab="reservas" aria-selected="false">Reservas</button>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <section id="roteiro">
+      <div class="strip" id="strip"></div>
+      <div id="dayview"></div>
+    </section>
+    <section id="transporte" hidden></section>
+    <section id="hoteis" hidden></section>
+    <section id="reservas" hidden></section>
+    <p class="foot">Todos os horários estão no fuso local de cada cidade.</p>
+  </div>
+</main>
+
+<script>
+const DAYS = [
+  { date:"2026-09-10", flag:"🇧🇷", title:"Embarque",
+    route:[["Fortaleza","air"],["Paris"]], sleep:"a bordo do AF 415",
+    notes:[{k:"tz", txt:"Paris fica 5h à frente de Fortaleza."}],
+    items:[
+      {t:"19:55", k:"air", txt:"Voo AF 415, Fortaleza para Paris (CDG)", sub:"Chegada às 09:35 do dia 11."}
+    ]},
+  { date:"2026-09-11", flag:"🇷🇴", title:"Chegada em Bucareste",
+    route:[["Paris","air"],["Bucareste"]], sleep:"The Marmorosch, Autograph Collection",
+    notes:[{k:"tz", txt:"Bucareste fica 1h à frente de Paris."}],
+    items:[
+      {t:"09:35", k:"air", txt:"Chegada em Paris (CDG) e conexão"},
+      {t:"12:00", k:"air", txt:"Voo AF 6634, Paris para Bucareste", sub:"Chegada às 15:50."},
+      {t:"17:00", k:"stay", txt:"Check-in no The Marmorosch, Autograph Collection"},
+      {t:"fim de tarde", k:"visit", txt:"Passeio a pé: Passagem Villacrosse, Lipscani e Igreja de São Nicolau"},
+      {t:"19:45", k:"visit", txt:"Pôr do sol no Bulevardul Unirii"},
+      {t:"20:00", k:"food", txt:"Jantar no Amethyst Sky Bar & Rooftop", sub:"Bulevardul Unirii 47C, área rooftop, das 20h às 23h. Alternativa: Linea/Closer to the Moon.", ok:"Confirmado para 8 pessoas"}
+    ]},
+  { date:"2026-09-12", flag:"🇦🇱", title:"Bucareste, Corfu e Saranda",
+    route:[["Bucareste","air"],["Corfu","sea"],["Saranda"]], sleep:"Buzë Boutique Hotel",
+    notes:[{k:"tz", txt:"Na travessia para Saranda o relógio volta 1h."}],
+    items:[
+      {t:"manhã", k:"stay", txt:"Checkout do Marmorosch e ida ao aeroporto"},
+      {t:"12:00", k:"air", txt:"Voo FR 7564, Bucareste para Corfu", sub:"Chegada às 13:35."},
+      {t:"14:00", k:"other", lab:"Armários", txt:"Malas nos Yellow Lockers do porto", sub:"Ethnikis Antistaseos 4. Quatro armários grandes até as 19h."},
+      {t:"tarde", k:"food", txt:"Tarde livre em Corfu: almoço e compras na Old Town", sub:"Almoço no Lampadina; Ampakas e Spianada Meats & Greens como reserva."},
+      {t:"19:00", k:"sea", txt:"Ferry Rena S II, Corfu para Saranda", sub:"Chegada às 19:00, já no horário da Albânia."},
+      {t:"20:00", k:"stay", txt:"Check-in no Buzë Boutique Hotel"},
+      {t:"21:30", k:"food", txt:"Jantar no Lost Seaside, a pé do hotel"}
+    ]},
+  { date:"2026-09-13", flag:"🇦🇱", title:"Butrint e Ksamil",
+    route:[["Saranda","car"],["Butrint","car"],["Ksamil"]], sleep:"Buzë Boutique Hotel",
+    notes:[],
+    items:[
+      {t:"manhã", k:"other", txt:"Manhã livre em Saranda, com café da manhã sem hora"},
+      {t:"09:30", k:"visit", opt:true, txt:"Missa na Santa Marcelina, para quem quiser"},
+      {t:"13:45", k:"car", txt:"Retirada dos carros no porto", sub:"Sixt, balcão do Sarandë Porto, Audi Q2. O outro carro do grupo tem reserva separada."},
+      {t:"14:40", k:"visit", txt:"Butrint, sítio arqueológico UNESCO", sub:"Parada rápida de 1h."},
+      {t:"16:00", k:"food", txt:"Beach club em Ksamil: almoço tardio e praia"},
+      {t:"19:20", k:"visit", txt:"Pôr do sol em Ksamil"}
+    ]},
+  { date:"2026-09-14", flag:"🇦🇱", title:"Gjirokastër",
+    route:[["Saranda","car"],["Gjirokastër","car"],["Saranda"]], sleep:"Buzë Boutique Hotel",
+    notes:[],
+    items:[
+      {t:"10:00", k:"car", txt:"Saída de Saranda, em dois carros"},
+      {t:"11:20", k:"visit", txt:"Gjirokastër: Zekate House, castelo e bazar", sub:"A Zekate House é uma casa otomana de 1811."},
+      {t:"13:30", k:"food", txt:"Almoço na Furra ou na Taverna Kuka"},
+      {t:"16:00", k:"car", txt:"Retorno para Saranda", sub:"Chegada prevista às 17:20."},
+      {t:"18:45", k:"visit", opt:true, txt:"Opcional: mirante do Castelo de Lëkurësi"},
+      {t:"19:00", k:"food", txt:"Drinks no Asi Rooftop"},
+      {t:"21:00", k:"food", txt:"Jantar no Mare Nostrum"}
+    ]},
+  { date:"2026-09-15", flag:"🇦🇱", title:"Aniversário do Bruno",
+    route:[["Saranda","car"],["Jale","sea"],["Himara","sea"],["Jale"]], sleep:"Folie Marine Beach Hotel & Club",
+    notes:[],
+    items:[
+      {t:"manhã", k:"car", txt:"Checkout do Buzë (até 11:00) e estrada até Jale", sub:"Cerca de 1h45 de carro."},
+      {t:"14:15", k:"stay", txt:"Chegada ao Folie Marine Beach Hotel & Club, na praia de Jale"},
+      {t:"15:30", k:"sea", lab:"Barco privado", txt:"Costa de Himara, até 19:15", sub:"Rota All Himara Coastline: Pirate's Cave, Gjipe, Filikuri, túnel de submarinos e Porto Palermo. Pôr do sol no mar na volta."},
+      {t:"20:45", k:"food", txt:"Jantar de aniversário em Dhermi", sub:"Luciano, Azul by Havana ou Zoe Hora. Ou ficar pelo hotel."}
+    ]},
+  { date:"2026-09-16", flag:"🇬🇷", title:"Jale, Saranda e Corfu",
+    route:[["Jale","car"],["Saranda","sea"],["Corfu"]], sleep:"Arcadion Hotel",
+    notes:[{k:"tz", txt:"Na travessia para Corfu o relógio adianta 1h."}],
+    items:[
+      {t:"12:45", k:"car", txt:"Checkout do Folie Marine e saída para Saranda", sub:"Sair até 12:45: são 1h45 de estrada."},
+      {t:"14:00", k:"car", txt:"Devolução dos carros no porto de Saranda"},
+      {t:"16:00", k:"sea", txt:"Ferry Santa, Saranda para Corfu", sub:"Chegada às 17:30, já no horário da Grécia."},
+      {t:"18:00", k:"stay", txt:"Check-in no Arcadion Hotel, no Liston"},
+      {t:"noite", k:"food", txt:"Old Town: Liston, Spianada e as ruelas venezianas. Jantar no Anthos."},
+      {t:"se der tempo", k:"food", opt:true, txt:"Alternativa: jantar no Aragosta (cozinha até 23:00)", sub:"Sem carro, ver se dá certo de táxi."}
+    ]},
+  { date:"2026-09-17", flag:"🇨🇿", title:"Corfu para Praga",
+    route:[["Corfu","air"],["Praga"]], sleep:"Century Old Town Prague, MGallery",
+    notes:[{k:"tz", txt:"Praga fica 1h atrás de Corfu."}],
+    items:[
+      {t:"manhã", k:"other", txt:"Manhã livre em Corfu", sub:"Checkout do Arcadion até 11:00."},
+      {t:"14:30", k:"air", txt:"Voo FR 1544, Corfu para Praga", sub:"Chegada às 15:40."},
+      {t:"16:40", k:"stay", txt:"Check-in no Century Old Town Prague, MGallery"},
+      {t:"fim de tarde", k:"visit", txt:"Primeiro giro pela Old Town: Torre da Pólvora, Casa Municipal e relógio astronômico"},
+      {t:"20:30", k:"food", txt:"Jantar no V Zátiší", sub:"Liliová 1.", ok:"Confirmado para 8 pessoas"}
+    ]},
+  { date:"2026-09-18", flag:"🇨🇿", title:"Castelo e Malá Strana",
+    route:[["Praga"]], sleep:"Century Old Town Prague, MGallery",
+    notes:[],
+    items:[
+      {t:"09:30", k:"visit", txt:"Subida ao Castelo de Praga pelo tram 22", sub:"Catedral de São Vito, Palácio Real Velho e Beco de Ouro."},
+      {t:"depois", k:"visit", txt:"Descida a pé pela Nerudova até Malá Strana"},
+      {t:"14:00", k:"food", txt:"Almoço no Kampa Park", sub:"Terraço à beira-rio. Mesa até 16:30.", ok:"Confirmado: duas mesas de 4"},
+      {t:"tarde", k:"visit", txt:"Ilha de Kampa, Muro do Lennon e Ponte Carlos", sub:"Possível passeio de barco."},
+      {t:"fim de tarde", k:"food", txt:"Rooftop Cloud 9 (Hilton), Kayak Beach Bar ou Hoppy House"}
+    ]},
+  { date:"2026-09-19", flag:"🇨🇿", title:"Compras e Portfolio",
+    route:[["Praga"]], sleep:"Century Old Town Prague, MGallery",
+    notes:[{k:"warn", txt:"O voo de volta sai amanhã às 06:30. Vale deixar as malas prontas hoje à noite."}],
+    items:[
+      {t:"manhã", k:"other", txt:"Manhã livre"},
+      {t:"tarde", k:"visit", txt:"Compras na Pařížská (luxo) e na Na Příkopě", sub:"O Palladium fica na esquina do hotel."},
+      {t:"20:00", k:"food", txt:"Jantar no Portfolio Restaurant", sub:"Lannův palác, Havlíčkova 1030/1.", ok:"Confirmado para 8 pessoas"}
+    ]},
+  { date:"2026-09-20", flag:"🇧🇷", title:"Volta para casa",
+    route:[["Praga","air"],["Paris","air"],["Fortaleza"]], sleep:null,
+    notes:[
+      {k:"tz", txt:"Fortaleza fica 5h atrás de Paris."}
+    ],
+    items:[
+      {t:"06:30", k:"air", txt:"Voo AF 1583, Praga para Paris (CDG)", sub:"Chegada às 08:25."},
+      {t:"13:40", k:"air", txt:"Voo AF 416, Paris para Fortaleza", sub:"Chegada às 17:45."}
+    ]}
+];
+
+const LEGS = [
+  {d:"2026-09-10", k:"air", id:"AF 415", from:"Fortaleza", to:"Paris (CDG)", dep:"19:55", arr:"09:35", plus:true},
+  {d:"2026-09-11", k:"air", id:"AF 6634", from:"Paris (CDG)", to:"Bucareste (OTP)", dep:"12:00", arr:"15:50"},
+  {d:"2026-09-12", k:"air", id:"FR 7564", from:"Bucareste (OTP)", to:"Corfu (CFU)", dep:"12:00", arr:"13:35"},
+  {d:"2026-09-12", k:"sea", id:"Rena S II", from:"Corfu", to:"Saranda", dep:"19:00", arr:"19:00"},
+  {d:"2026-09-16", k:"sea", id:"Santa", from:"Saranda", to:"Corfu", dep:"16:00", arr:"17:30"},
+  {d:"2026-09-17", k:"air", id:"FR 1544", from:"Corfu (CFU)", to:"Praga (PRG)", dep:"14:30", arr:"15:40"},
+  {d:"2026-09-20", k:"air", id:"AF 1583", from:"Praga (PRG)", to:"Paris (CDG)", dep:"06:30", arr:"08:25"},
+  {d:"2026-09-20", k:"air", id:"AF 416", from:"Paris (CDG)", to:"Fortaleza", dep:"13:40", arr:"17:45"}
+];
+
+const HOTELS = [
+  {name:"The Marmorosch, Autograph Collection", city:"Bucareste", range:"11 a 12 de setembro", n:1, ci:"15:00", co:"12:00", addr:"Strada Doamnei 2, Bucareste, 030053, Romênia"},
+  {name:"Buzë Boutique Hotel", city:"Saranda", range:"12 a 15 de setembro", n:3, ci:"14:00", co:"11:00", addr:"Rruga Butrinti, Lagja Nr. 1, Sarandë, Albânia"},
+  {name:"Folie Marine Beach Hotel & Club", city:"Jale", range:"15 a 16 de setembro", n:1, ci:"15:00", co:"11:30", addr:"Rruga Jali Superior A, Jal, Himarë, Albânia"},
+  {name:"Arcadion Hotel", city:"Corfu", range:"16 a 17 de setembro", n:1, ci:"15:00", co:"11:00", addr:"2 Vlassopoulou Str. & Kapodistriou Str., Liston, 49131, Corfu, Grécia"},
+  {name:"Century Old Town Prague, MGallery", city:"Praga", range:"17 a 20 de setembro", n:3, ci:"15:00", co:"12:00", addr:"Na Poříčí 7, Praha 1, Chéquia"}
+];
+
+const MEALS = [
+  {name:"Amethyst Sky Bar & Rooftop", when:"Sexta, 11/09, às 20:00", who:"8 pessoas, área rooftop, até 23:00", addr:"Bulevardul Unirii 47C, Bucareste"},
+  {name:"V Zátiší", when:"Quinta, 17/09, às 20:30", who:"8 pessoas, até 22:50", addr:"Liliová 1, Praga"},
+  {name:"Kampa Park", when:"Sexta, 18/09, às 14:00", who:"Duas reservas de 4 pessoas, terraço, até 16:30", addr:"Kampa Park, Praga"},
+  {name:"Portfolio Restaurant", when:"Sábado, 19/09, às 20:00", who:"8 pessoas", addr:"Havlíčkova 1030/1, Praga"}
+];
+
+const WD = ["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
+const WDS = ["dom","seg","ter","qua","qui","sex","sáb"];
+const KIND = {air:"Voo", sea:"Ferry", car:"Carro", stay:"Hotel"};
+const LEGCLASS = {air:"", sea:" sea", car:" car"};
+
+const $ = s => document.querySelector(s);
+const toDate = k => { const [y,m,d] = k.split("-").map(Number); return new Date(y, m-1, d); };
+const localKey = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const cap = s => s[0].toUpperCase()+s.slice(1);
+const isTime = t => /^\d{2}:\d{2}$/.test(t);
+const mins = t => +t.slice(0,2)*60 + +t.slice(3);
+const mapUrl = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+const leg = k => `<i class="leg${LEGCLASS[k]||""}" aria-hidden="true"></i>`;
+const routeHTML = r => r.map(([c,k]) => `<span class="city">${c}</span>${k ? leg(k) : ""}`).join("");
+
+let selected = 0, todayIdx = -1, nextRef = null;
+
+/* Hero route */
+$("#route").innerHTML = routeHTML([
+  ["Fortaleza","air"],["Paris","air"],["Bucareste","air"],["Corfu","sea"],["Saranda","car"],
+  ["Jale","car"],["Saranda","sea"],["Corfu","air"],["Praga","air"],["Paris","air"],["Fortaleza"]
+]);
+
+/* Status */
+function computeStatus(){
+  const now = new Date(), key = localKey(now), last = DAYS.length-1;
+  todayIdx = DAYS.findIndex(d => d.date === key);
+  nextRef = null;
+  let s1, s2, target;
+  if (key < DAYS[0].date){
+    const diff = Math.round((toDate(DAYS[0].date) - toDate(key)) / 864e5);
+    s1 = `Faltam ${diff} dia${diff>1?"s":""} para o embarque`;
+    s2 = "Primeiro voo: AF 415, dia 10 às 19:55, saindo de Fortaleza.";
+    target = 0;
+  } else if (key > DAYS[last].date){
+    s1 = "Viagem concluída";
+    s2 = "O roteiro continua aqui para consulta.";
+    target = last;
+  } else {
+    const d = DAYS[todayIdx], m = now.getHours()*60 + now.getMinutes();
+    s1 = `Hoje é o dia ${todayIdx+1} de ${DAYS.length}: ${d.title}`;
+    const i = d.items.findIndex(it => isTime(it.t) && mins(it.t) > m);
+    if (i > -1){
+      nextRef = [todayIdx, i];
+      s2 = `A seguir, ${d.items[i].t}: ${d.items[i].txt}`;
+    } else if (todayIdx < last){
+      const nd = DAYS[todayIdx+1], ni = nd.items.find(it => isTime(it.t));
+      s2 = `Amanhã, ${ni.t}: ${ni.txt}`;
+    } else {
+      s2 = "Os compromissos de hoje já passaram. Boa chegada em casa.";
+    }
+    target = todayIdx;
+  }
+  $("#status").innerHTML = `<span class="dot" aria-hidden="true"></span><div><p class="s1">${s1}</p><p class="s2">${s2}</p><button class="s-btn" id="goToday">Abrir o dia no roteiro</button></div>`;
+  $("#goToday").onclick = () => { showTab("roteiro"); selectDay(target, true); document.querySelector(".tabs").scrollIntoView({behavior:"smooth"}); };
+  return target;
+}
+
+/* Strip */
+function renderStrip(){
+  $("#strip").innerHTML = DAYS.map((d,i) => {
+    const dt = toDate(d.date);
+    return `<button class="chip${i===todayIdx?" today":""}" data-i="${i}" aria-pressed="${i===selected}" aria-label="${cap(WD[dt.getDay()])}, ${dt.getDate()} de setembro: ${d.title}">
+      <span class="wd">${WDS[dt.getDay()]}</span><span class="n">${dt.getDate()}</span><span class="f">${d.flag}</span></button>`;
+  }).join("");
+  $("#strip").querySelectorAll(".chip").forEach(b => b.onclick = () => selectDay(+b.dataset.i, true));
+}
+
+function selectDay(i, scrollStrip){
+  selected = i;
+  $("#strip").querySelectorAll(".chip").forEach((b,j) => b.setAttribute("aria-pressed", j===i));
+  if (scrollStrip){
+    const strip = $("#strip"), chip = strip.children[i];
+    strip.scrollLeft = chip.offsetLeft - strip.clientWidth/2 + chip.clientWidth/2;
+  }
+  renderDay(i);
+}
+
+/* Day view */
+function renderDay(i){
+  const d = DAYS[i], dt = toDate(d.date);
+  const notes = d.notes.length ? `<ul class="notes">${d.notes.map(n =>
+    `<li class="${n.k}"><b>${n.k==="tz"?"Fuso: ":"Atenção: "}</b>${n.txt}</li>`).join("")}</ul>` : "";
+  const items = d.items.map((it,j) => {
+    const isNext = nextRef && nextRef[0]===i && nextRef[1]===j;
+    const label = it.lab || KIND[it.k];
+    return `<li class="it${it.opt?" opt":""}${isNext?" next":""}">
+      <div class="t${isTime(it.t)?"":" soft"}">${it.t}</div>
+      <div>
+        ${label ? `<span class="kind">${label}</span>` : ""}
+        <p class="txt">${it.txt}</p>
+        ${it.sub ? `<p class="sub">${it.sub}</p>` : ""}
+        ${it.ok ? `<p class="ok">✓ ${it.ok}</p>` : ""}
+        ${it.code ? `<p class="code">${it.code[0]}: <b>${it.code[1]}</b></p>` : ""}
+      </div></li>`;
+  }).join("");
+  $("#dayview").innerHTML = `<article class="day">
+    <p class="dow">${cap(WD[dt.getDay()])}, ${dt.getDate()} de setembro${i===todayIdx?' <span class="today-tag">hoje</span>':""}</p>
+    <h2>${d.title}</h2>
+    <p class="droute">${routeHTML(d.route)}</p>
+    ${d.sleep ? `<p class="sleep">Pernoite: <b>${d.sleep}</b></p>` : ""}
+    ${notes}
+    <ol class="tl">${items}</ol>
+    <div class="daynav">
+      <button id="prev" ${i===0?"disabled":""}>Dia anterior</button>
+      <button id="next" ${i===DAYS.length-1?"disabled":""}>Próximo dia</button>
+    </div></article>`;
+  $("#prev").onclick = () => selectDay(i-1, true);
+  $("#next").onclick = () => selectDay(i+1, true);
+}
+
+/* Transporte */
+function renderTransport(){
+  const rows = LEGS.map(l => {
+    const dt = toDate(l.d);
+    return `<article class="row">
+      <p class="meta">${cap(WDS[dt.getDay()])}, ${String(dt.getDate()).padStart(2,"0")}/09 <b>${KIND[l.k]} ${l.id}</b></p>
+      <div class="span">
+        <div><strong>${l.dep}</strong><small>${l.from}</small></div>
+        ${leg(l.k)}
+        <div class="end"><strong>${l.arr}${l.plus?"<sup>+1</sup>":""}</strong><small>${l.to}</small></div>
+      </div>
+      ${l.warn ? `<p class="warn-line">${l.warn}</p>` : ""}
+    </article>`;
+  }).join("");
+  $("#transporte").innerHTML = `
+    <h2 class="sec-title">Voos e ferries</h2>
+    <p class="sec-intro">Partida à esquerda, chegada à direita, no horário local.</p>
+    ${rows}
+    <h2 class="sec-title">Carro na Albânia</h2>
+    <article class="row">
+      <h3 style="margin:0;font-size:1rem;font-weight:600">Sixt, balcão do Sarandë Porto</h3>
+      <p class="p">Audi Q2</p>
+      <p class="small">Retirada no domingo, 13/09, e devolução na quarta, 16/09, às 14h.</p>
+    </article>`;
+}
+
+/* Hotéis */
+function renderHotels(){
+  $("#hoteis").innerHTML = `
+    <h2 class="sec-title">Hotéis</h2>
+    <p class="sec-intro">Nove noites em cinco hotéis, todas as reservas confirmadas.</p>
+    ${HOTELS.map(h => `<article class="row hotel">
+      <div class="nights"><b>${h.n}</b><span>${h.n>1?"noites":"noite"}</span></div>
+      <div>
+        <h3>${h.name}</h3>
+        <p class="p">${h.city}, ${h.range}</p>
+        <p class="small">Check-in ${h.ci}, checkout ${h.co}</p>
+        <p class="small">${h.addr}</p>
+        <a class="maplink" href="${mapUrl(h.name+", "+h.addr)}" target="_blank" rel="noopener">Abrir no mapa</a>
+      </div></article>`).join("")}`;
+}
+
+/* Reservas */
+function renderReservations(){
+  $("#reservas").innerHTML = `
+    <h2 class="sec-title">Restaurantes</h2>
+    <p class="sec-intro">Reservas confirmadas para o grupo.</p>
+    ${MEALS.map(r => `<article class="row res">
+      <h3>${r.name}</h3>
+      <p class="p">${r.when}</p>
+      <p class="small">${r.who}</p>
+      <a class="maplink" href="${mapUrl(r.name+", "+r.addr)}" target="_blank" rel="noopener">Abrir no mapa</a>
+    </article>`).join("")}`;
+}
+
+/* Tabs */
+function showTab(name){
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.tab===name));
+  ["roteiro","transporte","hoteis","reservas"].forEach(id => $("#"+id).hidden = id!==name);
+}
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => showTab(t.dataset.tab));
+
+/* Init */
+selected = computeStatus();
+renderStrip();
+selectDay(selected, true);
+renderTransport();
+renderHotels();
+renderReservations();
+
+setInterval(() => {
+  const keep = selected;
+  computeStatus();
+  renderStrip();
+  selectDay(keep, false);
+}, 60000);
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+}
+</script>
+</body>
+</html>
